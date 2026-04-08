@@ -114,7 +114,6 @@ class Rest
                 "CRM_ID"  => $arElem["ID"],
             ];
             $arLoadProductArray = [
-                "IBLOCK_SECTION_ID" => $iblockSectionId,
                 "IBLOCK_ID"         => $iblockId,
                 "PREVIEW_TEXT"      => $arElem["PROPERTIES"]["DESCRIPTION"]["VALUE"],
                 "PROPERTY_VALUES"   => $PROP,
@@ -149,7 +148,9 @@ class Rest
                             "NAME"      => $arElem["PROPERTIES"]["CITY"]["VALUE"],
                         ];
                         $iblockSectionId = $bs->Add($arFields);
-                        AddMessage2Log($iblockSectionId);
+                        $arLoadProductArray = [
+                            "IBLOCK_SECTION_ID" => $iblockSectionId,
+                        ];
                     }
                 }
                 $el->Add($arLoadProductArray);
