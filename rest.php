@@ -103,6 +103,29 @@ class Rest
                 }
             }
 
+            $el = new CIBlockElement;
+            $PROP = [
+                "PHONE"   => $arElem["PROPERTIES"]["PHONE"]["VALUE"],
+                "EMAIL"   => $arElem["PROPERTIES"]["EMAIL"]["VALUE"],
+                "SITE"    => $arElem["PROPERTIES"]["WEBSITE"]["VALUE"],
+                "TG"      => $arElem["PROPERTIES"]["TELEGRAM"]["VALUE"],
+                "VK"      => $arElem["PROPERTIES"]["VK"]["VALUE"],
+                "ADDRESS" => $arElem["PROPERTIES"]["ADDRESS"]["VALUE"],
+                "CRM_ID"  => $arElem["ID"],
+            ];
+            $arLoadProductArray = [
+                "IBLOCK_SECTION_ID" => $iblockSectionId,
+                "IBLOCK_ID"         => $iblockId,
+                "PREVIEW_TEXT"      => $arElem["PROPERTIES"]["DESCRIPTION"]["VALUE"],
+                "PROPERTY_VALUES"   => $PROP,
+                "NAME"              => $arElem["NAME"],
+                "CODE"              => $arElem["CODE"],
+                "ACTIVE"            => "Y",
+                "PREVIEW_PICTURE"   => CFile::MakeFileArray($arElem["PROPERTIES"]["PHOTO"]["VALUE"]),
+                "DETAIL_PICTURE"    => CFile::MakeFileArray($arElem["PROPERTIES"]["PHOTO"]["VALUE"]),
+                "LICENSE_POPUP"     => "Y",
+            ];
+            
             if ($allowAdding) {
                 $iblockSectionId = false;
                 if ($iblockId == 20) {
@@ -129,53 +152,8 @@ class Rest
                         AddMessage2Log($iblockSectionId);
                     }
                 }
-
-                $el = new CIBlockElement;
-                $PROP = [
-                    "PHONE"   => $arElem["PROPERTIES"]["PHONE"]["VALUE"],
-                    "EMAIL"   => $arElem["PROPERTIES"]["EMAIL"]["VALUE"],
-                    "SITE"    => $arElem["PROPERTIES"]["WEBSITE"]["VALUE"],
-                    "TG"      => $arElem["PROPERTIES"]["TELEGRAM"]["VALUE"],
-                    "VK"      => $arElem["PROPERTIES"]["VK"]["VALUE"],
-                    "ADDRESS" => $arElem["PROPERTIES"]["ADDRESS"]["VALUE"],
-                    "CRM_ID"  => $arElem["ID"],
-                ];
-                $arLoadProductArray = [
-                    "IBLOCK_SECTION_ID" => $iblockSectionId,
-                    "IBLOCK_ID"         => $iblockId,
-                    "PREVIEW_TEXT"      => $arElem["PROPERTIES"]["DESCRIPTION"]["VALUE"],
-                    "PROPERTY_VALUES"   => $PROP,
-                    "NAME"              => $arElem["NAME"],
-                    "CODE"              => $arElem["CODE"],
-                    "ACTIVE"            => "Y",
-                    "PREVIEW_PICTURE"   => CFile::MakeFileArray($arElem["PROPERTIES"]["PHOTO"]["VALUE"]),
-                    "DETAIL_PICTURE"    => CFile::MakeFileArray($arElem["PROPERTIES"]["PHOTO"]["VALUE"]),
-                    "LICENSE_POPUP"     => "Y",
-                ];
                 $el->Add($arLoadProductArray);
             } elseif ($edit) {
-                $el = new CIBlockElement;
-                $PROP = [
-                    "PHONE"   => $arElem["PROPERTIES"]["PHONE"]["VALUE"],
-                    "EMAIL"   => $arElem["PROPERTIES"]["EMAIL"]["VALUE"],
-                    "SITE"    => $arElem["PROPERTIES"]["WEBSITE"]["VALUE"],
-                    "TG"      => $arElem["PROPERTIES"]["TELEGRAM"]["VALUE"],
-                    "VK"      => $arElem["PROPERTIES"]["VK"]["VALUE"],
-                    "ADDRESS" => $arElem["PROPERTIES"]["ADDRESS"]["VALUE"],
-                    "CRM_ID"  => $arElem["ID"],
-                ];
-                $arLoadProductArray = [
-                    "IBLOCK_SECTION_ID" => false,
-                    "IBLOCK_ID"         => $arElem["IBLOCK_ID"],
-                    "PREVIEW_TEXT"      => $arElem["PROPERTIES"]["DESCRIPTION"]["VALUE"],
-                    "PROPERTY_VALUES"   => $PROP,
-                    "NAME"              => $arElem["NAME"],
-                    "CODE"              => $arElem["CODE"],
-                    "ACTIVE"            => "Y",
-                    "PREVIEW_PICTURE"   => CFile::MakeFileArray($arElem["PROPERTIES"]["PHOTO"]["VALUE"]),
-                    "DETAIL_PICTURE"    => CFile::MakeFileArray($arElem["PROPERTIES"]["PHOTO"]["VALUE"]),
-                    "LICENSE_POPUP"     => "Y",
-                ];
                 $el->Update($idForEdit, $arLoadProductArray);
             }
         }
