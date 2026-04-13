@@ -238,16 +238,6 @@ class Rest
         return $result['result'];
     }
 
-    function getElemsList($iblockCrmId, $filter, $targetIbId, $crmIblockSectionId)
-    {
-        $arElems = $this->getElem($iblockCrmId, $crmIblockSectionId);
-        $this->agregateIBlock($arElems, $targetIbId);
-    }
-
-    /**
-     * Статический метод для запуска синхронизации на основе входящих параметров.
-     * Вызывается один раз при обращении к скрипту.
-     */
     public static function handleRequest()
     {
         $iblockCrmId = 34; // ID инфоблока в CRM
@@ -272,7 +262,8 @@ class Rest
 
         if ($targetIbId !== null) {
             $rest = new self($iblockCrmId);
-            $rest->getElemsList($iblockCrmId, null, $targetIbId, $_REQUEST["id"]);
+            $arElems = $this->getElem($iblockCrmId, $crmIblockSectionId);
+            $this->agregateIBlock($arElems, $targetIbId);
         }
     }
 }
